@@ -1,0 +1,72 @@
+<?php require_once 'templates/layout/header.phtml'; ?>
+
+<!-- Sección para Agregar Artículos -->
+<div class="container mt-5">
+    <h3>Agregar Artículo</h3>
+    <form action="agregarArticulo" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" required>
+        </div>
+
+        <div class="form-group">
+            <label for="valor">Valor</label>
+            <input type="number" class="form-control" name="valor" id="valor" required>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" required>
+        </div>
+
+        <div class="form-group">
+            <label for="categoria">Categoría</label>
+            <select class="form-control" name="categoria" id="categoria" required>
+                <?php foreach ($categorias as $categoria): ?>
+                    <option value="<?= $categoria->ID_categoria ?>"><?= $categoria->nombre ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input type="url" class="form-control" name="imagen" id="imagen" placeholder="URL de la Imagen" required>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary">Agregar Artículo</button>
+    </form>
+</div>
+
+<!-- Lista de Artículos con Opciones de Editar y Eliminar -->
+<div class="container mt-5">
+    <h3>Lista de Artículos</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Valor</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($prendas as $prenda): ?>
+                <tr>
+                    <td><?= htmlspecialchars($prenda->nombre) ?></td>
+                    <td><?= htmlspecialchars($prenda->descripcion) ?></td>
+                    <td>$<?= htmlspecialchars($prenda->valor) ?></td>
+                    <td><?= htmlspecialchars($prenda->categoria_nombre) ?></td>
+                    <td>
+                        <a href="mostrarFormEdicion/<?= $prenda->ID_articulo ?>" class="btn btn-success">Editar</a>
+                        <a href="eliminarArticulo/<?= $prenda->ID_articulo ?>" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este artículo?');">Eliminar</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<?php require_once 'templates/layout/footer.phtml'; ?>

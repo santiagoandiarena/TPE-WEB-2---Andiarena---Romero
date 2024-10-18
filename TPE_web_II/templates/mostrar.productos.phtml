@@ -1,0 +1,36 @@
+<?php require_once 'templates/layout/header.phtml' ?>
+
+<?php //PREGUNTAR DONDE SE HACEN LAS VALIDACIONES 
+?>
+
+<ul class="list-group">
+    <div class="container">
+        <div class="row">
+            <?php foreach ($prendas as $prenda): ?>
+                <div class="col-md-6 mb-4">
+                    <div class="articulo row g-0 bg-body-secondary position-relative">
+                        <div class="col-md-6">
+                            <?php if (!empty($prenda->Imagen)): ?>
+                                <a href="producto/<?= htmlspecialchars($prenda->ID_articulo) ?>"><img src="<?= htmlspecialchars($prenda->Imagen) ?>" class="imagenproductos img-fluid" alt="<?= htmlspecialchars($prenda->nombre) ?>"></a>
+                            <?php else: ?>
+                                <p>No se encontró la imagen.</p>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-md-6 p-4 ps-md-0">
+                            <h5 class="mt-0"><?= htmlspecialchars($prenda->nombre) ?></h5>
+                            <p><?= htmlspecialchars($prenda->descripcion) ?></p>
+                            <div>$<?= htmlspecialchars($prenda->valor) ?></div>
+                            <p><a href="producto/<?= htmlspecialchars($prenda->ID_articulo) ?>" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">VER</a></p>
+                            <p>Categoria: <?= htmlspecialchars($prenda->categoria_nombre) ?></p>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
+    </div>
+</ul>
+
+<p class="mt-3"><small>Mostrando <?= htmlspecialchars($count) ?> prendas</small></p>
+
+<?php require_once 'templates/layout/footer.phtml' ?>

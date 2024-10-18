@@ -1,0 +1,62 @@
+<?php require_once 'templates/layout/header.phtml'; ?>
+
+<?php
+?>
+
+
+<div class="container mt-5">
+    <h2 class="text-center">Agregar Categorías</h2>
+    <form action="agregarCategorias" method="POST">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Agregar Categoria</button>
+    </form>
+</div>
+
+
+<h2>Lista de todas las categorias </h2>
+<p>En la siguiente tabla se podra editar, o eliminar las categorias</p>
+
+
+
+<div class="container mt-5">
+    <h2 class="text-center">Tabla de Edicion</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+
+            <tr>
+                <th class="text-center">Nombre de la categoria</th>
+
+                <th class="text-center"> Editar</th>
+                <th class="text-center"> Borrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($categorias as $categoria): ?>
+                <tr>
+                    <td class="text-center"> <?= htmlspecialchars($categoria->nombre) ?></td>
+                    <td class="text-center">
+                        <div class="container mt-5">
+                            <p>Formulario para editar nombre de la categoria</p>
+                            <form action="editarcategorias/<?= htmlspecialchars($categoria->ID_categoria) ?>" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese el nuevo nombre para editar  (<?= htmlspecialchars($categoria->nombre) ?> )" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Editar</button>
+                            </form>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <p>Usted va a borrar la categoria : <?= htmlspecialchars($categoria->nombre) ?> </p>
+                        <a href="borrarcategoria/<?= $categoria->ID_categoria ?>" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este artículo?');">Borrar</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+
+    <?php require_once 'templates/layout/footer.phtml'; ?>

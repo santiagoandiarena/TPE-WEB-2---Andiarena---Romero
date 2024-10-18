@@ -1,0 +1,37 @@
+<?php require_once 'templates/layout/header.phtml'; ?>
+
+
+<div class="container mt-4">
+    <div class="row">
+        <?php if (!empty($productos)): ?>
+            <p>Estás en la categoría: <?= $productos[0]->nombre  ?> </p>
+
+
+            <?php foreach ($productos as $producto): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= htmlspecialchars($producto->nombre) ?></h5>
+                            <p class="card-text">Precio: $<?= htmlspecialchars($producto->valor) ?></p>
+                            <p class="card-text">Descripción: <?= htmlspecialchars($producto->descripcion) ?></p>
+                            <p class="card-text">Temporada: <?= htmlspecialchars($producto->temporada) ?></p>
+
+                            <?php if (!empty($producto->Imagen)): ?>
+                                <img src="<?= htmlspecialchars($producto->Imagen) ?>" class="imagenproductoscat img-fluid" alt="">
+                            <?php else: ?>
+                                <p>No se encontró la imagen.</p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+        <?php else: ?>
+            <div class="col-12">
+                <p>No hay productos disponibles.</p>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?php require_once 'templates/layout/footer.phtml'; ?>
